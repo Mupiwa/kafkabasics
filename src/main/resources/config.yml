@@ -1,4 +1,0 @@
-kafka:
-  bootstrapServers: localhost:9092
-  topic: gdr-message
-  groupId: basic-consumer-group
