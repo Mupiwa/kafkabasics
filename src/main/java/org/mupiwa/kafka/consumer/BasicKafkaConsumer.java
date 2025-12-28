@@ -31,7 +31,7 @@ public class BasicKafkaConsumer {
         KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
 
         // Subscribe to topic
-        consumer.subscribe(Collections.singletonList("contracts-repo"));
+        consumer.subscribe(Collections.singletonList("gdr-message"));
 
         System.out.println("Kafka consumer started. Waiting for messages...");
 

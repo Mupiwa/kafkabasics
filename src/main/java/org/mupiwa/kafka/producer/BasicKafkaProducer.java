@@ -17,7 +17,7 @@ public class BasicKafkaProducer {
 
         KafkaProducer<String, String> producer = new KafkaProducer<>(props);
         System.out.printf("Hello Kafka");
-        String topic = "contracts-repo"; // Replace with your topic
+        String topic = "gdr-message"; // Replace with your topic
         String message = "Sunny Side Ext 2025";
 
         try {
