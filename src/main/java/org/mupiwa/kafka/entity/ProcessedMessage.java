@@ -21,16 +21,20 @@ public class ProcessedMessage {
     private String businessDate;
     private String sourceTag;
     private String entity;
+    private double amount;
+    private String currency;
     private LocalDateTime processedAt;
 
     public ProcessedMessage() {
     }
-    public ProcessedMessage(int messageId, boolean isEod, String businessDate, String sourceTag, String entity, LocalDateTime processedAt) {
+    public ProcessedMessage(int messageId, boolean isEod, String businessDate, String sourceTag, String entity, double amount, String currency, LocalDateTime processedAt) {
         this.messageId = messageId;
         this.isEod = isEod;
         this.businessDate = businessDate;
         this.sourceTag = sourceTag;
         this.entity = entity;
+        this.amount = amount;
+        this.currency = currency;
         this.processedAt = processedAt;
     }
     public Long getId() {
@@ -68,6 +72,18 @@ public class ProcessedMessage {
     }
     public void setEntity(String entity) {
        this.entity = entity;
+    }
+    public double getAmount() {
+        return amount;
+    }
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+    public String getCurrency() {
+        return currency;
+    }
+    public void setCurrency(String currency) {
+        this.currency = currency;
     }
     public LocalDateTime getProcessedAt() {
         return processedAt;

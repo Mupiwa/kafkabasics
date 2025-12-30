@@ -165,6 +165,16 @@
                         <input type="text" id="entity" th:field="*{entity}" required>
                     </div>
                     
+                    <div class="form-group">
+                        <label for="amount">Amount</label>
+                        <input type="number" id="amount" th:field="*{amount}" step="0.01" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="currency">Currency</label>
+                        <input type="text" id="currency" th:field="*{currency}" placeholder="e.g., USD, EUR" required>
+                    </div>
+                    
                     <button type="submit">Send Message to Kafka</button>
                 </form>
                 
@@ -210,6 +220,8 @@
                             <th>Business Date</th>
                             <th>Source Tag</th>
                             <th>Entity</th>
+                            <th>Amount</th>
+                            <th>Currency</th>
                             <th>Processed At</th>
                         </tr>
                     </thead>
@@ -221,6 +233,8 @@
                             <td th:text="${msg.businessDate}"></td>
                             <td th:text="${msg.sourceTag}"></td>
                             <td th:text="${msg.entity}"></td>
+                            <td th:text="${msg.amount}"></td>
+                            <td th:text="${msg.currency}"></td>
                             <td th:text="${#temporals.format(msg.processedAt, 'yyyy-MM-dd HH:mm:ss')}"></td>
                         </tr>
                     </tbody>

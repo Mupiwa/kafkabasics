@@ -39,6 +39,8 @@ public class KafkaConsumerService {
         processedMessage.setBusinessDate(message.getBusinessDate());
         processedMessage.setSourceTag(message.getSourceTag());
         processedMessage.setEntity(message.getEntity());
+        processedMessage.setAmount(message.getAmount());
+        processedMessage.setCurrency(message.getCurrency());
         processedMessage.setProcessedAt(LocalDateTime.now());
 
         processedMessageRepository.save(processedMessage);
