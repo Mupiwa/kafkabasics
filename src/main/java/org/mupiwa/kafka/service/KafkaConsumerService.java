@@ -12,15 +12,26 @@ import java.time.LocalDateTime;
 public class KafkaConsumerService {
 
     private final ProcessedMessageRepository processedMessageRepository;
+    private final SourceEntityBusinessDateService sourceEntityBusinessDateService;
 
-    public KafkaConsumerService(ProcessedMessageRepository processedMessageRepository) {
+    public KafkaConsumerService(ProcessedMessageRepository processedMessageRepository,
+                                SourceEntityBusinessDateService sourceEntityBusinessDateService) {
         this.processedMessageRepository = processedMessageRepository;
+        this.sourceEntityBusinessDateService = sourceEntityBusinessDateService;
     }
 
     @KafkaListener(topics = "${kafka.topic}", groupId = "${spring.kafka.consumer.group-id}")
     public void consume(GdrMessage message) {
-        System.out.printf("Consumed message: messageId=%d, businessDate=%s, sourceTag=%s, entity=%s%n",
-                message.getMessageId(), message.getBusinessDate(), message.getSourceTag(), message.getEntity());
+        System.out.printf("Consumed message: messageId=%d, isEod=%b, businessDate=%s, sourceTag=%s, entity=%s%n",
+                message.getMessageId(), message.isEod(), message.getBusinessDate(), 
+                message.getSourceTag(), message.getEntity());
+
+        if (message.isEod()) {
+            sourceEntityBusinessDateService.rollBusinessDate(message.getSourceTag(), message.getEntity());
+            System.out.printf("EOD message processed: rolled business date for %s-%s%n",
+                    message.getSourceTag(), message.getEntity());
+            return;
+        }
 
         ProcessedMessage processedMessage = new ProcessedMessage();
         processedMessage.setMessageId(message.getMessageId());
