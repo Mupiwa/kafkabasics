@@ -156,11 +156,6 @@
                     </div>
                     
                     <div class="form-group">
-                        <label for="businessDate">Business Date</label>
-                        <input type="text" id="businessDate" th:field="*{businessDate}" placeholder="YYYY-MM-DD" required>
-                    </div>
-                    
-                    <div class="form-group">
                         <label for="sourceTag">Source Tag</label>
                         <input type="text" id="sourceTag" th:field="*{sourceTag}" required>
                     </div>
@@ -172,6 +167,29 @@
                     
                     <button type="submit">Send Message to Kafka</button>
                 </form>
+                
+                <h2 style="margin-top: 20px;">Current Business Dates</h2>
+                
+                <div th:if="${#lists.isEmpty(businessDates)}" class="no-messages">
+                    No business dates configured yet.
+                </div>
+                
+                <table th:if="${not #lists.isEmpty(businessDates)}" style="margin-top: 10px;">
+                    <thead>
+                        <tr>
+                            <th>Source Tag</th>
+                            <th>Entity</th>
+                            <th>Business Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="bd : ${businessDates}">
+                            <td th:text="${bd.sourceTag}"></td>
+                            <td th:text="${bd.entity}"></td>
+                            <td th:text="${bd.businessDate}"></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
             
             <div class="card">
